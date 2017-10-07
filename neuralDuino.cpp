@@ -1,4 +1,9 @@
 #include "neuralDuino.h"
+#define trig 13
+#define echo 12
+
+float far = 0;
+float distance = 0;
 
 neuron::neuron(){
 	beta = 0;
@@ -33,6 +38,8 @@ void neuron::begin(byte num_syn, byte noConnections = FALSE, byte noInputs = FAL
 		synWeight[i] = (float)(((float)random(0, 100) / (float)100) - 0.2);
 		prevDelWeight[i] = 0; //important to initialize allocated memory
 	}
+	pinMode(trig, OUTPUT);
+  	pinMode(echo, INPUT);
 }
 
 void neuron::setInput(float inputVals[]){
@@ -147,10 +154,17 @@ void neuron::adjWeights(){
 }
 
 void neuron::printWeights(){
+    digitalWrite(trig, LOW);
+    delayMicroseconds(2);
+    digitalWrite(trig, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(trig, LOW);
+    far = pulseIn(echo, HIGH);
+    distance = (far/2) / 29.1;
 	for (byte i = 0; i < numSynapse; i++){
 		Serial.print(synWeight[i]);
-		tone(8, synWeight[i]*666, 4);
-		delay(4*1.3);
+		tone(8, synWeight[i]*66*distance, 40);
+		delay(80);
 		Serial.print(",");
 	}
 	Serial.println();
