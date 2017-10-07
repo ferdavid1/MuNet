@@ -75,7 +75,7 @@ void learn(){
         node3.backpropagate();
 //call adjustWeights for all nodes after backrprp8n is done for every node
         node3.adjWeights();
-        tone(8, 1000, );
+        tone(8, 1000, 10);
         node2.adjWeights();
         node1.adjWeights();
         
