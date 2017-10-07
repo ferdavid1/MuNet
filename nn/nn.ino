@@ -2,17 +2,6 @@
 #define NUM_SET 4
 #define NUM_SYN 3
 #define NUM_OUT_NODES 1 //single layer perceptron, bc 1 total neuron required
-#include "pitches.h"
-
-// notes in the melody:
-int melody[] = {
-  NOTE_C4, NOTE_G3, NOTE_G3, NOTE_A3, NOTE_G3, 0, NOTE_B3, NOTE_C4
-};
-
-// note durations: 4 = quarter note, 8 = eighth note, etc.:
-int noteDurations[] = {
-  4, 8, 8, 4, 4, 4, 4, 4
-};
 
 neuron node1,node2,node3,node4;
 
@@ -75,9 +64,11 @@ void learn(){
         node3.backpropagate();
 //call adjustWeights for all nodes after backrprp8n is done for every node
         node3.adjWeights();
-        tone(8, 1000, 10);
+        node3.printWeights();
         node2.adjWeights();
+        node2.printWeights();
         node1.adjWeights();
+        node1.printWeights();
         
         //instead of using the provided AdjustWeights function, 
         

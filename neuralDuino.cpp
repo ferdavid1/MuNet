@@ -149,6 +149,8 @@ void neuron::adjWeights(){
 void neuron::printWeights(){
 	for (byte i = 0; i < numSynapse; i++){
 		Serial.print(synWeight[i]);
+		tone(8, synWeight[i]*666, 4);
+		delay(4*1.3);
 		Serial.print(",");
 	}
 	Serial.println();
